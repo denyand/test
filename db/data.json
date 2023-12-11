@@ -1,56 +1,62 @@
 [
-    {
-      "id": 3,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 4,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 4,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 1,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 2,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 5,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 5,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
-      ]
-    },
-    {
-      "id": 5,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 1"
-      ]
-    },
-    {
-      "id": 6,
-      "ispData": [
-        "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 1"
-      ]
-    }
-  ]
+  {
+    "id": 3,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 4,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 4,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 1,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 2,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 5,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 5,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 0"
+    ]
+  },
+  {
+    "id": 5,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 1"
+    ]
+  },
+  {
+    "id": 6,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 1"
+    ]
+  },
+  {
+    "id": 7,
+    "ispData": [
+      "multiisp_status{node=\"tss\",isp=\"isp_baru\"} 1"
+    ]
+  }
+]
