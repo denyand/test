@@ -13,49 +13,34 @@ app.get('/', (req: Request, res: Response) => {
     res.send('halo');
 });
 
-app.get('/about', (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, 'public', 'about.html'));
-});
-
 app.get('/multi-isp-status', (req: Request, res: Response) => {
     fs.readFile('./db/data.json', 'utf-8', (error, data) => {
         if (error) {
-            res.send("terjadi kesalahan pada pembacaan file");
+            res.send("Terjadi kesalahan pada pembacaan file");
             return;
         }
-        res.send(JSON.parse(data));
+        const IspData = JSON.parse(data) as { id: number; ispData: string[] }[];
+
+        // Mengonversi JSON ke teks
+        const text = IspData.map((ispData) => {
+          
+            return ispData.ispData[0].replace(/\}(\d+)$/, "} $1");
+        }).join("\n");
+
+        res.type('text').send(text);
     });
 });
 
-app.get('/multi-isp-status/:id', (req: Request, res: Response) => {
-    const { id } = req.params;
-    
-    fs.readFile('./db/data.json', 'utf-8', (error, data) => {
-        if (error) {
-            res.send('gagal dalam baca database');
-            return;
-        }
-        
-        const multiIspStatus = JSON.parse(data) as { id: number; ispData: string[] }[];
-        const IspStatus = multiIspStatus.find(status => status.id === Number(id));
-        if (!IspStatus) {
-            res.send('ISP status dengan ID tersebut tidak ditemukan');
-            return;
-        }
-        res.send(IspStatus);
-    });
-});
-
-app.post('/multi-isp-post', (req, res) => {
-    const { id, ispData } = req.body;
+app.post('/multi-isp-status', (req, res) => {
+    const {  ispData } = req.body;
     
     fs.readFile('./db/data.json', 'utf-8', (error, data) => {
         if (error) {
             res.send("terjadi kesalahan saat baca database");
             return;
         }
-        const IspData = JSON.parse(data) as { id: number; ispData: string[] }[];
-        const newIspData = { id: Number(id), ispData };
+        const IspData = JSON.parse(data) as { ispData: string[] }[];
+        const newIspData = { ispData };
         IspData.push(newIspData);
 
         fs.writeFile('./db/data.json', JSON.stringify(IspData, null, 2), (error) => {
@@ -63,7 +48,7 @@ app.post('/multi-isp-post', (req, res) => {
                 res.send("terjadi kesalahan saat menulis database");
                 return;
             }
-            res.send("IspData Berhasil ditambahkan");
+            res.type('text').send("IspData Berhasil ditambahkan"); // Set response type to text
         });
     });
 });
