@@ -31,27 +31,45 @@ app.get('/multi-isp-status', (req: Request, res: Response) => {
     });
 });
 
-app.post('/multi-isp-status', (req, res) => {
-    const {  ispData } = req.body;
-    
-    fs.readFile('./db/data.json', 'utf-8', (error, data) => {
-        if (error) {
-            res.send("terjadi kesalahan saat baca database");
-            return;
-        }
-        const IspData = JSON.parse(data) as { ispData: string[] }[];
-        const newIspData = { ispData };
-        IspData.push(newIspData);
+interface IspEntry {
+  id: string;
+  ispData: string[];
+}
 
-        fs.writeFile('./db/data.json', JSON.stringify(IspData, null, 2), (error) => {
-            if(error) {
-                res.send("terjadi kesalahan saat menulis database");
-                return;
-            }
-            res.type('text').send("IspData Berhasil ditambahkan"); // Set response type to text
-        });
+app.post('/multi-isp-status', (req, res) => {
+  const newIspData: IspEntry = req.body;
+
+  fs.readFile('./db/data.json', 'utf8', (err, data) => {
+    if (err) {
+      res.status(500).send("Error reading from database");
+      return;
+    }
+
+    let IspData: IspEntry[] = JSON.parse(data);
+
+    // Cari entri berdasarkan ID
+    const existingIspIndex = IspData.findIndex(isp => isp.id === newIspData.id);
+
+    if (existingIspIndex !== -1) {
+      // Perbarui data yang ada dengan ID yang sama
+      IspData[existingIspIndex] = newIspData;
+    } else {
+      // Tambahkan data baru jika ID tidak ditemukan
+      IspData.push(newIspData);
+    }
+
+    fs.writeFile('./db/data.json', JSON.stringify(IspData, null, 2), (writeErr) => {
+      if (writeErr) {
+        res.status(500).send("Error writing to database");
+        return;
+      }
+
+      res.send(`Data ISP berhasil ${existingIspIndex !== -1 ? 'diperbarui' : 'ditambahkan'}.`);
     });
+  });
 });
+
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
